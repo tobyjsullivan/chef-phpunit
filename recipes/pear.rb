@@ -6,6 +6,7 @@
 #
 
 include_recipe "php"
+include_recipe "php::module_curl"
 
 #PHP Extension and Application Repository PEAR channel
 pearhub_chan = php_pear_channel "pear.php.net" do
@@ -30,6 +31,15 @@ end
 
 #upgrade PHPUnit
 php_pear "PHPUnit" do
+    channel pearhub_chan.channel_name
+    if node[:phpunit][:version] != "latest"
+        version "#{node[:phpunit][:version]}"
+    end
+    action :upgrade if node[:phpunit][:version] == "latest"
+end
+
+#upgrade PHPUnit_Selenium
+php_pear "PHPUnit_Selenium" do
     channel pearhub_chan.channel_name
     if node[:phpunit][:version] != "latest"
         version "#{node[:phpunit][:version]}"
