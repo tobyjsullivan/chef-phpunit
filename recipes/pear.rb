@@ -41,17 +41,11 @@ end
 #upgrade DbUnit extension
 php_pear "DbUnit" do
     channel pearhub_chan.channel_name
-    if node[:phpunit][:version] != "latest"
-        version "#{node[:phpunit][:version]}"
-    end
-    action :upgrade if node[:phpunit][:version] == "latest"
+    action :upgrade
 end
 
 #upgrade PHPUnit_Story extension
 php_pear "PHPUnit_Story" do
     channel pearhub_chan.channel_name
-    if node[:phpunit][:version] != "latest"
-        version "#{node[:phpunit][:version]}"
-    end
-    action :upgrade if node[:phpunit][:version] == "latest"
+    action :upgrade
 end
