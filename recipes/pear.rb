@@ -38,6 +38,12 @@ php_pear "PHPUnit" do
     action :upgrade if node[:phpunit][:version] == "latest"
 end
 
+#upgrade PHPUnit_Selenium extension
+php_pear "PHPUnit_Selenium" do
+    channel pearhub_chan.channel_name
+    action :upgrade
+end
+
 #upgrade DbUnit extension
 php_pear "DbUnit" do
     channel pearhub_chan.channel_name
